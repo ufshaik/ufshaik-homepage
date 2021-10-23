@@ -12,7 +12,6 @@ import Paragraph from '../components/paragraph'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { BioSection, BioYear } from '../components/bio'
 
-// TODO: Fix the links
 
 const Page = () => {
     return (
@@ -46,9 +45,7 @@ const Page = () => {
                 <Paragraph>
                     Umar is a Software Developer based in St. John&apos;s with a passion for building strange stuff. He has a knack for all things, from planning and designing all the way
                     to solving real-life problems. When not coding, he loves to play video games (currently striving for platinum in {' '}
-                    <NextLink href={"https://www.ubisoft.com/en-ca/game/far-cry/far-cry-6"}>
-                        <Link> Far Cry 6 </Link>
-                    </NextLink>
+                        <Link href={"https://www.ubisoft.com/en-ca/game/far-cry/far-cry-6"} target={"_blank"}> Far Cry 6 </Link>
                     ).
                 </Paragraph>
                 <Box align={"center"} my={4}>
@@ -66,9 +63,7 @@ const Page = () => {
                 <BioSection>
                     <BioYear> 2019 to present </BioYear>
                     Working with {' '}
-                    <NextLink href={"https://www.linkedin.com/company/skillshawks/"}>
-                        <Link> Creatros Technologies Inc </Link>
-                    </NextLink>, Canada
+                    <Link href={"https://www.linkedin.com/company/skillshawks/"} target={"_blank"}> Creatros Technologies Inc </Link>, Canada
                 </BioSection>
                 <BioSection>
                     <BioYear>2019</BioYear>
@@ -77,9 +72,7 @@ const Page = () => {
                 <BioSection>
                     <BioYear>2018</BioYear>
                     Worked at {' '}
-                    <NextLink href={"https://www.linkedin.com/company/metrics-flow/"}>
-                        <Link> MetricsFlow</Link>
-                    </NextLink>, Canada.
+                    <Link href={"https://www.linkedin.com/company/metrics-flow/"} target={"_blank"}> MetricsFlow</Link>, Canada.
                 </BioSection>
                 <BioSection>
                     <BioYear>1994</BioYear>
