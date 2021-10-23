@@ -1,5 +1,18 @@
-import { Container, Box, Heading, Image, useColorModeValue } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import {
+    Container,
+    Box,
+    Heading,
+    Image,
+    useColorModeValue,
+    Link, Button
+} from '@chakra-ui/react'
 import Section from '../components/section'
+import Paragraph from '../components/paragraph'
+import { ChevronRightIcon } from '@chakra-ui/icons'
+import { BioSection, BioYear } from '../components/bio'
+
+// TODO: Fix the links
 
 const Page = () => {
     return (
@@ -28,10 +41,61 @@ const Page = () => {
             </Box>
             <Section delay={0.1}>
                 <Heading as={"h3"} variant={"section-title"}>
-                    Works
+                    Work
                 </Heading>
-                <p> Paragraph </p>
+                <Paragraph>
+                    Umar is a Software Developer based in St. John&apos;s with a passion for building strange stuff. He has a knack for all things, from planning and designing all the way
+                    to solving real-life problems. When not coding, he loves to play video games (currently striving for platinum in {' '}
+                    <NextLink href={"https://www.ubisoft.com/en-ca/game/far-cry/far-cry-6"}>
+                        <Link> Far Cry 6 </Link>
+                    </NextLink>
+                    ).
+                </Paragraph>
+                <Box align={"center"} my={4}>
+                    <NextLink href={"/works"}>
+                        <Button rightIcon={<ChevronRightIcon />} colorScheme={"teal"}>
+                            My portfolio
+                        </Button>
+                    </NextLink>
+                </Box>
             </Section>
+            <Section delay={0.2}>
+                <Heading as={"h3"} variant={"section-title"}>
+                    Bio
+                </Heading>
+                <BioSection>
+                    <BioYear> 2019 to present </BioYear>
+                    Working with {' '}
+                    <NextLink href={"https://www.linkedin.com/company/skillshawks/"}>
+                        <Link> Creatros Technologies Inc </Link>
+                    </NextLink>, Canada
+                </BioSection>
+                <BioSection>
+                    <BioYear>2019</BioYear>
+                    Completed Master&apos;s in Computer Science from Memorial University of Newfoundland, Canada
+                </BioSection>
+                <BioSection>
+                    <BioYear>2018</BioYear>
+                    Worked at {' '}
+                    <NextLink href={"https://www.linkedin.com/company/metrics-flow/"}>
+                        <Link> MetricsFlow</Link>
+                    </NextLink>, Canada.
+                </BioSection>
+                <BioSection>
+                    <BioYear>1994</BioYear>
+                    Born in Tirupathi (తిరుపతి), India.
+                </BioSection>
+            </Section>
+
+            <Section delay={0.3}>
+                <Heading as={"h3"} variant={"section-title"}>
+                    I ❤
+                </Heading>
+                <Paragraph>
+                    Gaming, Movies, Anime, Music, Art, Custom Mods & Maintenance, Machine Learning
+                </Paragraph>
+            </Section>
+
         </Container>
     )
 }
