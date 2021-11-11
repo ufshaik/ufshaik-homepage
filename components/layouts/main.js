@@ -3,6 +3,7 @@ import {Box, Container} from '@chakra-ui/react';
 import Navbar from '../navbar.js'
 import PaintDvt from '../paint-dvt'
 import NoSsr from '../no-ssr'
+import Footer from "../footer"
 
 
 const Main = ({ children, router }) =>{
@@ -20,6 +21,7 @@ const Main = ({ children, router }) =>{
                 <PaintDvt />
               </NoSsr>
                 {children}
+              <Footer />
             </Container>
 
         </Box>
