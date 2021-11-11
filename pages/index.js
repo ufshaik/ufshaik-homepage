@@ -5,13 +5,21 @@ import {
   Heading,
   Image,
   useColorModeValue,
-  Link, Button
+  List,
+  Link,
+  Button,
+  ListItem,
+  Icon
 } from '@chakra-ui/react'
 import Section from '../components/section'
 import Layout from '../components/layouts/article'
 import Paragraph from '../components/paragraph'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { BioSection, BioYear } from '../components/bio'
+// IoLogoTwitter, IoLogoInstagram, IoLogoGitlab,IoLogoDiscord
+import {
+  IoLogoGithub,
+} from 'react-icons/io5'
 
 
 const Page = () => {
@@ -92,6 +100,29 @@ const Page = () => {
           <Paragraph>
             Gaming, Movies, Anime, Music, Art, Custom Mods & Maintenance, Machine Learning
           </Paragraph>
+        </Section>
+
+        <Section delay={0.5}>
+          <Heading as={"h3"} variant={"section-title"}>
+            My Footprint
+          </Heading>
+          <List>
+            <ListItem>
+              <Link href={"/"} target={"_blank"}>
+                <Button variant={"ghost"} colorScheme={'teal'} leftIcon={ <Icon as={IoLogoGithub}/> }> @ufshaik </Button>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href={"/"} target={"_blank"}>
+                <Button variant={"ghost"} colorScheme={'teal'} leftIcon={ <Icon as={IoLogoGithub}/> }> @ufshaik </Button>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href={"/"} target={"_blank"}>
+                <Button variant={"ghost"} colorScheme={'teal'} leftIcon={ <Icon as={IoLogoGithub}/> }> @ufshaik </Button>
+              </Link>
+            </ListItem>
+          </List>
         </Section>
 
       </Container>
