@@ -19,7 +19,9 @@
     "framer-motion": "^4.1.17",
     "next": "^11.1.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "three": "^0.133.1"
   },
   "devDependencies": {
     "@chakra-ui/theme-tools": "^1.2.2",

@@ -1,0 +1,64 @@
+import { Container, Heading, SimpleGrid } from '@chakra-ui/react'
+import Layout from '../components/layouts/article'
+import Section from '../components/section'
+import { GridItem } from '../components/grid-item'
+
+import thumbMushroom from '../public/works/Mushroom-Invaders/Thumb.jpg'
+
+
+const Posts = () => (
+  <Layout title="Posts">
+    <Container>
+      <Heading as="h3" fontSize={20} mb={4}>
+        Popular Posts
+      </Heading>
+
+      <Section delay={0.1}>
+        <SimpleGrid columns={[1, 2, 2]} gap={6}>
+          <GridItem
+            title="Test 1"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+          <GridItem
+            title="Test 2"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+        </SimpleGrid>
+      </Section>
+
+      <Section delay={0.3}>
+        <SimpleGrid columns={[1, 2, 2]} gap={6}>
+          <GridItem
+            title="Test 3"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+          <GridItem
+            title="Test 4"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+        </SimpleGrid>
+      </Section>
+
+      <Section delay={0.5}>
+        <SimpleGrid columns={[1, 2, 2]} gap={6}>
+          <GridItem
+            title="Test 5"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+          <GridItem
+            title="Test 6"
+            thumbnail={thumbMushroom}
+            href="/"
+          />
+        </SimpleGrid>
+      </Section>
+    </Container>
+  </Layout>
+)
+
+// export default Posts
