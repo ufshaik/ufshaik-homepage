@@ -4,16 +4,12 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { loadGLTFModel } from '../libs/model'
 
-function easeOutCircle(x){
-  return Math.sqrt(1 - Math.pow(x - 1, 4))
-}
-
 const PaintDvt = () =>{
   const refContainer = useRef()
   const [loading, setLoading] = useState(true)
   const [renderer, setRenderer] = useState()
   const [_camera, setCamera] = useState()
-  const [target] = useState(new THREE.Vector3(-0.5, 1.2, 0))
+  const [target] = useState(new THREE.Vector3(0, 0.3, 0))
   const [initialCameraPosition] = useState(
     new THREE.Vector3(
       20 * Math.sin(0.2 * Math.PI),
@@ -40,6 +36,8 @@ const PaintDvt = () =>{
   useEffect( () =>{
     const { current: container } = refContainer
     if (container && !renderer){
+      let mixer; // Gets updated on return from gltf model
+      let clock = new THREE.Clock();
       const scW = container.clientWidth
       const scH = container.clientHeight
       const renderer = new THREE.WebGLRenderer({
@@ -52,22 +50,21 @@ const PaintDvt = () =>{
       container.appendChild(renderer.domElement)
       setRenderer(renderer)
 
-      // 640 -> 240
-      // 8 -> 6
-      const scale = scH * 0.04 + 2
-      const camera = new THREE.OrthographicCamera(
-        -scale,
-          scale,
-        scale,
-          -scale,
-        0.01,
-        50000
-      )
+      const camera = new THREE.PerspectiveCamera( 4, scW / scH, 0.1, 1000 );
+      camera.position.set(0, 0, 10)
       camera.position.copy( initialCameraPosition)
       camera.lookAt(target)
       setCamera(camera)
 
-      const ambientLight = new THREE.AmbientLight(0xcccccc,1)
+      const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444, 0.4 );
+      hemiLight.position.set( 0, 20, 0 );
+      scene.add( hemiLight );
+
+      const dirLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+      dirLight.position.set( - 3, 10, - 10 );
+      scene.add( dirLight );
+
+      const ambientLight = new THREE.AmbientLight(0xcccccc,0.5)
       scene.add(ambientLight)
 
       const controls = new OrbitControls(camera, renderer.domElement)
@@ -75,30 +72,22 @@ const PaintDvt = () =>{
       controls.target = target
       setControls(controls)
 
-      loadGLTFModel(scene, '/Tororo.glb', {
-        receiveShadow: false,
-        castShadow: false
-      }).then( () =>{
+
+      loadGLTFModel(scene, '/Pathfinder_1k.glb', {
+        receiveShadow: true,
+        castShadow: true
+      }).then( (obj) =>{
+        mixer = obj[1] // assign returned mixer as a local variable
         animate()
         setLoading(false)
       })
+
       let req = null
-      let frame = 0
+
       const animate = () => {
+          if ( mixer ) mixer.update( clock.getDelta() );
           req = requestAnimationFrame(animate)
-
-          frame = frame <= 100 ? frame + 1 : frame
-          if(frame <= 100) {
-            const p = initialCameraPosition
-            const rotateSpeed = -easeOutCircle(frame / 120) * Math.PI * 20
-            camera.position.y = 5
-            camera.position.x = p.x * Math.cos(rotateSpeed) + p.z * Math.sin(rotateSpeed)
-            camera.position.z = p.z * Math.cos(rotateSpeed) - p.x * Math.sin(rotateSpeed)
-            camera.lookAt(target)
-          }  else{
-            controls.update()
-          }
-
+          controls.update()
           renderer.render(scene, camera)
       }
       return ( ) =>{

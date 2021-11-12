@@ -1,9 +1,11 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import * as THREE from 'three'
 
 export function loadGLTFModel(
   scene,
   glbPath,
-  options = { receiveShadow: true, castShadow: true }
+  options = { receiveShadow: true, castShadow: true },
+  mixer
 ){
   const { receiveShadow, castShadow } = options
   return new Promise((resolve, reject) => {
@@ -19,14 +21,19 @@ export function loadGLTFModel(
         obj.castShadow = castShadow
         scene.add(obj)
 
-        obj.traverse(function (child){
-          if(child.isMesh) {
-            child.castShadow = castShadow
-            child.receiveShadow = receiveShadow
+        mixer = new THREE.AnimationMixer(obj);
+        mixer.clipAction(gltf.animations[0]).play();
+        scene.add(obj);
+
+        obj.traverse(function (node){
+          if(node.isMesh) {
+            node.castShadow = castShadow
+            node.receiveShadow = receiveShadow
           }
         })
 
-        resolve(obj)
+        scene.add(obj)
+        resolve([obj, mixer])
       },
       undefined,
       function(error){
